@@ -1,0 +1,163 @@
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 10rem;
+  /* position: sticky; */
+  width: 100%;
+  top: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.actions button {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.actions button:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--purple-dark);
+  background-color: var(--purple-light);
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.actions button:first-of-type > svg {
+  color: var(--purple);
+}
+
+.actions button:last-of-type {
+  background-color: var(--yellow-light);
+}
+
+.actions button:last-of-type > svg {
+  color: var(--yellow-dark);
+}
+
+/* Intro */
+.intro {
+  background: url(../../assets/intro-bg.svg);
+  display: flex;
+  padding: 5.75rem 10rem;
+  align-items: center;
+  gap: 3.5rem;
+  justify-content: space-between;
+}
+
+.intro img {
+  width: 29.75rem;
+  height: 22.5rem;
+}
+
+.intro h1 {
+  font-family: "Baloo 2", sans-serif;
+  color: var(--base-title);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 130%;
+  width: 36.75rem;
+}
+
+.intro h1 + p {
+  margin-top: 1rem;
+  color: var(--base-subtitle);
+  font-size: 1.25rem;
+  line-height: 130%;
+  width: 36.75rem;
+  margin-bottom: 4.125rem;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2.5rem;
+}
+
+.item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--base-text);
+  font-size: 1rem;
+  line-height: 130%;
+}
+
+.icon {
+  color: var(--white);
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.cart {
+  background-color: var(--yellow-dark);
+}
+
+.package {
+  background-color: var(--base-text);
+}
+
+.timer {
+  background-color: var(--yellow);
+}
+
+.coffee {
+  background-color: var(--purple);
+}
+
+/* Coffee List */
+.coffeeList {
+  padding: 2rem 10rem 9.8125rem;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head h2 {
+  font-family: "Baloo 2", sans-serif;
+  color: var(--base-title);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 130%;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filters span {
+  padding: 0.375rem 0.75rem;
+  text-transform: uppercase;
+  border: 1px solid var(--yellow);
+  border-radius: 100px;
+  color: var(--yellow-dark);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 130%;
+  margin-bottom: 3.375rem;
+}
+
+/* List */
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 2rem;
+
+}
+
+.card {}
