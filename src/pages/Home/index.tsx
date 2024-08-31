@@ -3,6 +3,7 @@ import {
   MapPin,
   Package,
   ShoppingCart,
+  ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
 
@@ -85,16 +86,33 @@ export function Home() {
 
         <div className={styles.list}>
           {coffees.map((coffee) => {
-            // TODO: Finalizar o card (estrutura e estilização)
             return (
               <div className={styles.card}>
-                <img src={coffee.image} alt="" />
-                {coffee.tag.map((tag) => (
-                  <span>{tag}</span>
-                ))}
-                <strong>{coffee.name}</strong>
-                <span>{coffee.description}</span>
-                <span>R$<strong>{coffee.price.toFixed(2)}</strong></span>
+                <div className={styles.cardWrapper}>
+                  <img src={coffee.image} alt={coffee.name} />
+                  <div className={styles.tags}>
+                    {coffee.tag.map((tag) => (
+                      <span>{tag}</span>
+                    ))}
+                  </div>
+                  <strong>{coffee.name}</strong>
+                  <span>{coffee.description}</span>
+                  <div className={styles.buy}>
+                    <span>
+                      R$<strong>{coffee.price.toFixed(2).replace('.',',')}</strong>
+                    </span>
+                    <div>
+                      <div className={styles.quantity}>
+                        <button>+</button>
+                        <span>1</span>
+                        <button>-</button>
+                      </div>
+                      <button>
+                        <ShoppingCartSimple weight="fill" size={22} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             );
           })}
