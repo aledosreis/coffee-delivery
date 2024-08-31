@@ -15,7 +15,7 @@ import irlandes from '../assets/Irlandês.png'
 
 type Tag = 'tradicional' | 'especial' | 'com leite' | 'alcoólico' | 'gelado'
 
-type Coffee = {
+export type Coffee = {
   id: number;
   name: string;
   tag: Tag[];

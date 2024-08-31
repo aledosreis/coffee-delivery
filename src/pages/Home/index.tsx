@@ -2,7 +2,6 @@ import {
   Coffee,
   Package,
   ShoppingCart,
-  ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
 
@@ -11,6 +10,7 @@ import introImg from "../../assets/intro-image.png";
 import { coffees } from "../../data/coffee";
 
 import styles from "./Home.module.css";
+import { CoffeeCard } from "../../components/CoffeeCard";
 
 export function Home() {
   return (
@@ -72,33 +72,7 @@ export function Home() {
         <div className={styles.list}>
           {coffees.map((coffee) => {
             return (
-              <div className={styles.card}>
-                <div className={styles.cardWrapper}>
-                  <img src={coffee.image} alt={coffee.name} />
-                  <div className={styles.tags}>
-                    {coffee.tag.map((tag) => (
-                      <span>{tag}</span>
-                    ))}
-                  </div>
-                  <strong>{coffee.name}</strong>
-                  <span>{coffee.description}</span>
-                  <div className={styles.buy}>
-                    <span>
-                      R$<strong>{coffee.price.toFixed(2).replace('.',',')}</strong>
-                    </span>
-                    <div>
-                      <div className={styles.quantity}>
-                        <button>+</button>
-                        <span>1</span>
-                        <button>-</button>
-                      </div>
-                      <button>
-                        <ShoppingCartSimple weight="fill" size={22} />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CoffeeCard key={coffee.id} coffee={coffee} />
             );
           })}
         </div>
