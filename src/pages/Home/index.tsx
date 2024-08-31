@@ -1,13 +1,11 @@
 import {
   Coffee,
-  MapPin,
   Package,
   ShoppingCart,
   ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
 
-import logo from "../../assets/logo.svg";
 import introImg from "../../assets/intro-image.png";
 
 import { coffees } from "../../data/coffee";
@@ -17,19 +15,6 @@ import styles from "./Home.module.css";
 export function Home() {
   return (
     <>
-      <header className={styles.header}>
-        <img src={logo} />
-        <div className={styles.actions}>
-          <button>
-            <MapPin weight="fill" size={22} />
-            Araraquara, SP
-          </button>
-          <button>
-            <ShoppingCart weight="fill" size={22} />
-          </button>
-        </div>
-      </header>
-
       <div className={styles.intro}>
         <div>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
