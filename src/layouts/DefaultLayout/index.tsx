@@ -9,7 +9,9 @@ export function DefaultLayout() {
   return (
     <>
       <header className={styles.header}>
-        <img src={logo} />
+        <a href="/">
+          <img src={logo} />
+        </a>
         <div className={styles.actions}>
           <span>
             <MapPin weight="fill" size={22} />
