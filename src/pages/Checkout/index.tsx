@@ -6,29 +6,35 @@ import {
   Money,
 } from "@phosphor-icons/react";
 
+import styles from "./Checkout.module.css";
+
 export function Checkout() {
   return (
-    <form className="checkout">
+    <form className={styles.checkout}>
       <div>
         <strong>Complete seu pedido</strong>
 
-        <div className="address">
-          <div className="info">
-            <MapPinLine />
+        <div className={styles.address}>
+          <div className={styles.info}>
+            <MapPinLine size={22} />
             <div>
               <span>Endereço de Entrega</span>
               <span>Informe o endereço onde deseja receber seu pedido</span>
             </div>
           </div>
 
-          <div className="inputs">
-            <input type="text" placeholder="CEP" />
-            <input type="text" placeholder="Rua" />
-            <div className="group">
-              <input type="text" placeholder="Número" />
-              <input type="text" placeholder="Complemento opcional" />
+          <div className={styles.inputs}>
+            <div className={styles.group}>
+              <input type="text" placeholder="CEP" />
             </div>
-            <div className="group">
+            <div className={styles.group}>
+              <input type="text" placeholder="Rua" />
+            </div>
+            <div className={styles.group}>
+              <input type="text" placeholder="Número" />
+              <input type="text" placeholder="Complemento (opcional)" />
+            </div>
+            <div className={styles.group}>
               <input type="text" placeholder="Bairro" />
               <input type="text" placeholder="Cidade" />
               <input type="text" placeholder="UF" />
@@ -36,9 +42,9 @@ export function Checkout() {
           </div>
         </div>
 
-        <div className="payment">
-          <div className="info">
-            <CurrencyDollar />
+        <div className={styles.payment}>
+          <div className={styles.info}>
+            <CurrencyDollar size={22} />
             <div>
               <span>Pagamento</span>
               <span>
@@ -47,18 +53,23 @@ export function Checkout() {
             </div>
           </div>
 
-          <div className="options">
-            <div>
-              <CreditCard />
+          <div className={styles.options}>
+            <select name="payment" id="payment">
+              <option value="credit">Cartão de crédito</option>
+              <option value="debit">Cartão de débito</option>
+              <option value="money">Dinheiro</option>
+            </select>
+            <div className={styles.option}>
+              <CreditCard size={16} />
               <span>Cartão de crédito</span>
             </div>
-            <div>
-              <Bank />
-              <span>Cartão de crédito</span>
+            <div className={styles.option}>
+              <Bank size={16} />
+              <span>Cartão de débito</span>
             </div>
-            <div>
-              <Money />
-              <span>Cartão de crédito</span>
+            <div className={styles.option}>
+              <Money size={16} />
+              <span>Dinheiro</span>
             </div>
           </div>
         </div>
@@ -67,20 +78,27 @@ export function Checkout() {
       <div>
         <strong>Cafés selecionados</strong>
 
-        <div className="price">
-          Cafés
-          <div>
-            <span>Total de itens</span>
-            <span>R$ 29,70</span>
-          </div>
-          <div>
-            <span>Entrega</span>
-            <span>R$ 3,50</span>
-          </div>
-          <div>
-            <span>Total</span>
-            <span>R$ 33,20</span>
-          </div>
+        <div className={styles.price}>
+          <div className={styles.coffee}>Café 1</div>
+          <div className={styles.separator} />
+          <div className={styles.coffee}>Café 2</div>
+          <div className={styles.separator} />
+          <table>
+            <tbody>
+              <tr>
+                <td>Total de itens</td>
+                <td>R$ 29,70</td>
+              </tr>
+              <tr>
+                <td>Entrega</td>
+                <td>R$ 3,50</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td>R$ 33,20</td>
+              </tr>
+            </tbody>
+          </table>
           <button type="submit">Confirmar pedido</button>
         </div>
       </div>
