@@ -94,6 +94,7 @@
   color: var(--purple);
   background-color: transparent;
   font-size: 1rem;
+  padding: 0;
 }
 
 .quantity span {
@@ -103,9 +104,11 @@
 }
 
 .buy > div > button {
+  display: flex;
   color: var(--white);
   background-color: var(--purple-dark);
   border: none;
+  align-items: center;
   border-radius: 6px;
   padding: 0.5rem;
 }

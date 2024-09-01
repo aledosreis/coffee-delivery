@@ -1,4 +1,4 @@
-import { ShoppingCartSimple } from "@phosphor-icons/react";
+import { ShoppingCartSimple, Plus, Minus } from "@phosphor-icons/react";
 
 import { Coffee } from "../../data/coffee";
 
@@ -26,9 +26,13 @@ export function CoffeeCard({ coffee }: CoffeCardProps) {
           </span>
           <div>
             <div className={styles.quantity}>
-              <button>+</button>
+              <button>
+                <Plus weight="bold" size={14} />
+              </button>
               <span>1</span>
-              <button>-</button>
+              <button>
+                <Minus weight="bold" size={14} />
+              </button>
             </div>
             <button>
               <ShoppingCartSimple weight="fill" size={22} />
