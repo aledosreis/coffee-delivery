@@ -11,13 +11,13 @@ export function DefaultLayout() {
       <header className={styles.header}>
         <img src={logo} />
         <div className={styles.actions}>
-          <button>
+          <span>
             <MapPin weight="fill" size={22} />
             Araraquara, SP
-          </button>
-          <button>
+          </span>
+          <a href="/checkout">
             <ShoppingCart weight="fill" size={22} />
-          </button>
+          </a>
         </div>
       </header>
 

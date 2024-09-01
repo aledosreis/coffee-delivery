@@ -15,14 +15,14 @@
   gap: 0.75rem;
 }
 
-.actions button {
+.actions span, .actions a {
   padding: 0.5rem;
   border-radius: 6px;
   border: none;
   cursor: pointer;
 }
 
-.actions button:first-of-type {
+.actions span {
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -32,14 +32,14 @@
   font-family: inherit;
 }
 
-.actions button:first-of-type > svg {
+.actions span > svg {
   color: var(--purple);
 }
 
-.actions button:last-of-type {
+.actions a {
   background-color: var(--yellow-light);
 }
 
-.actions button:last-of-type > svg {
+.actions a > svg {
   color: var(--yellow-dark);
 }
