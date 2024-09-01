@@ -133,6 +133,81 @@ input::placeholder {
   width: 28rem;
 }
 
+.coffee {
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 0.5rem 0.25rem;
+}
+
+.coffee > img {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1.25rem;
+}
+
+.coffeeInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.coffeInfo > span {
+  color: var(--base-subtitle);
+  line-height: 130%;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions .quantity {
+  background-color: var(--base-button);
+  border-radius: 6px;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.actions .quantity button {
+  border: none;
+  color: var(--purple);
+  background-color: transparent;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.actions .quantity span {
+  color: var(--base-title);
+  font-size: 1rem;
+  line-height: 130%;
+}
+
+.actions > button {
+  background-color: var(--base-button);
+  color: var(--base-text);
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  line-height: 160%;
+}
+
+.actions button svg {
+  color: var(--purple);
+}
+
+.coffee > span {
+  color: var(--base-text);
+  font-weight: 700;
+  line-height: 130%;
+}
+
 .separator {
   width: 100%;
   height: 1px;
@@ -168,7 +243,7 @@ tr:last-child {
   font-weight: 700;
 }
 
-button {
+.price > button {
   padding: 0.75rem 0.5rem;
   color: var(--white);
   background-color: var(--yellow);

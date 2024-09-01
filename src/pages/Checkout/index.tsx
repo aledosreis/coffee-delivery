@@ -3,8 +3,14 @@ import {
   CreditCard,
   CurrencyDollar,
   MapPinLine,
+  Minus,
   Money,
+  Plus,
+  Trash,
 } from "@phosphor-icons/react";
+
+import tradicional from "../../assets/Expresso.png";
+import latte from "../../assets/Latte.png";
 
 import styles from "./Checkout.module.css";
 
@@ -79,9 +85,51 @@ export function Checkout() {
         <strong>Cafés selecionados</strong>
 
         <div className={styles.price}>
-          <div className={styles.coffee}>Café 1</div>
+          <div className={styles.coffee}>
+            <img src={tradicional} />
+            <div className={styles.coffeeInfo}>
+              <span>Expresso Tradicional</span>
+              <div className={styles.actions}>
+                <div className={styles.quantity}>
+                  <button>
+                    <Plus weight="bold" size={14} />
+                  </button>
+                  <span>1</span>
+                  <button>
+                    <Minus weight="bold" size={14} />
+                  </button>
+                </div>
+                <button>
+                  <Trash weight="bold" size={16} />
+                  Remover
+                </button>
+              </div>
+            </div>
+            <span>R$ 9,90</span>
+          </div>
           <div className={styles.separator} />
-          <div className={styles.coffee}>Café 2</div>
+          <div className={styles.coffee}>
+            <img src={latte} />
+            <div className={styles.coffeeInfo}>
+              <span>Latte</span>
+              <div className={styles.actions}>
+                <div className={styles.quantity}>
+                  <button>
+                    <Plus weight="bold" size={14} />
+                  </button>
+                  <span>1</span>
+                  <button>
+                    <Minus weight="bold" size={14} />
+                  </button>
+                </div>
+                <button>
+                  <Trash weight="bold" size={16} />
+                  Remover
+                </button>
+              </div>
+            </div>
+            <span>R$ 19,80</span>
+          </div>
           <div className={styles.separator} />
           <table>
             <tbody>
