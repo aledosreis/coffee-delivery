@@ -1,3 +1,5 @@
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Bank,
   CreditCard,
@@ -15,8 +17,15 @@ import latte from "../../assets/Latte.png";
 import styles from "./Checkout.module.css";
 
 export function Checkout() {
+  const navigate = useNavigate()
+
+  function handleCheckoutSubmit(e: FormEvent) {
+    e.preventDefault()
+    navigate('/checkout/success')
+  }
+
   return (
-    <form className={styles.checkout}>
+    <form className={styles.checkout} onSubmit={handleCheckoutSubmit}>
       <div>
         <strong>Complete seu pedido</strong>
 
