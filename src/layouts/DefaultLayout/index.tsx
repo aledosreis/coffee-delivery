@@ -19,6 +19,7 @@ export function DefaultLayout() {
           </span>
           <a href="/checkout">
             <ShoppingCart weight="fill" size={22} />
+            <span>3</span>
           </a>
         </div>
       </header>

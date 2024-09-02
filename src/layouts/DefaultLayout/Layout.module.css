@@ -16,6 +16,9 @@
 }
 
 .actions span, .actions a {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
   padding: 0.5rem;
   border-radius: 6px;
   border: none;
@@ -23,9 +26,6 @@
 }
 
 .actions span {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
   color: var(--purple-dark);
   background-color: var(--purple-light);
   font-size: 0.875rem;
@@ -38,8 +38,23 @@
 
 .actions a {
   background-color: var(--yellow-light);
+  position: relative;
 }
 
 .actions a > svg {
   color: var(--yellow-dark);
+}
+
+.actions a span {
+  position: absolute;
+  text-decoration: none;
+  top: -30%;
+  right: -30%;
+  border-radius: 1000px;
+  background-color: var(--yellow-dark);
+  color: var(--white);
+  font-size: 0.75rem;
+  line-height: 130%;
+  font-weight: 700;
+  padding: 0.3rem 0.5rem;
 }
