@@ -37,7 +37,7 @@ export function Checkout() {
     useForm<CheckoutFormInputs>({
       resolver: zodResolver(checkoutFormSchema),
     });
-  const { cartItems } = useCart();
+  const { cartItems, incrementItemQuantity, decrementItemQuantity, removeItem } = useCart();
 
   const coffeesInCart = cartItems.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.id);
@@ -50,6 +50,18 @@ export function Checkout() {
   });
 
   const selectedPayment = watch("paymentMethod");
+
+  function handleIncrementItem(itemId: number) {
+    incrementItemQuantity(itemId)
+  }
+
+  function handleDecrementItem(itemId: number) {
+    decrementItemQuantity(itemId)
+  }
+
+  function handleRemoveItem(itemId: number) {
+    removeItem(itemId)
+  }
 
   function handleCheckoutSubmit(data: CheckoutFormInputs) {
     console.log(data);
@@ -163,15 +175,15 @@ export function Checkout() {
                     <span>{coffee.name}</span>
                     <div className={styles.actions}>
                       <div className={styles.quantity}>
-                        <button>
+                        <button onClick={() => handleDecrementItem(coffee.id!)}>
                           <Minus weight="bold" size={14} />
                         </button>
                         <span>{coffee.quantity}</span>
-                        <button>
+                        <button onClick={() => handleIncrementItem(coffee.id!)}>
                           <Plus weight="bold" size={14} />
                         </button>
                       </div>
-                      <button>
+                      <button onClick={() => handleRemoveItem(coffee.id!)}>
                         <Trash weight="bold" size={16} />
                         Remover
                       </button>
