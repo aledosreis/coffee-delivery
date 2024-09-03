@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
 interface CartItem {
-  id: string;
+  id: number;
   quantity: number;
 }
 
