@@ -20,26 +20,28 @@ import styles from "./Checkout.module.css";
 
 const checkoutFormSchema = z.object({
   cep: z.string(),
-  street: z.string(),
-  number: z.number(),
+  street: z.string().min(1),
+  number: z.number().min(1),
   complement: z.string().optional(),
-  neighborhood: z.string(),
-  city: z.string(),
+  neighborhood: z.string().min(1),
+  city: z.string().min(1),
   state: z.string().length(2),
-  paymentMethod: z.string(),
+  paymentMethod: z.enum(["credit", "debit", "money"])
 });
 
 type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>;
 
 export function Checkout() {
   const navigate = useNavigate();
-  const { register, handleSubmit, watch, setValue } = useForm<CheckoutFormInputs>({
-    resolver: zodResolver(checkoutFormSchema),
-  });
+  const { register, handleSubmit, watch, setValue } =
+    useForm<CheckoutFormInputs>({
+      resolver: zodResolver(checkoutFormSchema),
+    });
 
   const selectedPayment = watch("paymentMethod");
 
-  function handleCheckoutSubmit() {
+  function handleCheckoutSubmit(data: CheckoutFormInputs) {
+    console.log(data)
     navigate("/checkout/success");
   }
 
@@ -62,13 +64,17 @@ export function Checkout() {
 
           <div className={styles.inputs}>
             <div className={styles.group}>
-              <input type="text" placeholder="CEP" {...register("cep")} />
+              <input type="number" placeholder="CEP" {...register("cep")} />
             </div>
             <div className={styles.group}>
               <input type="text" placeholder="Rua" {...register("street")} />
             </div>
             <div className={styles.group}>
-              <input type="text" placeholder="Número" {...register("number")} />
+              <input
+                type="number"
+                placeholder="Número"
+                {...register("number", { valueAsNumber: true })}
+              />
               <input
                 type="text"
                 placeholder="Complemento (opcional)"
@@ -99,10 +105,7 @@ export function Checkout() {
           </div>
 
           <div className={styles.options}>
-            <select
-              id="paymentMethod"
-              {...register("paymentMethod")}
-            >
+            <select id="paymentMethod" {...register("paymentMethod")}>
               <option value="">Selecione...</option>
               <option value="credit">Cartão de crédito</option>
               <option value="debit">Cartão de débito</option>
