@@ -23,7 +23,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   function addItem(item: CartItem) {
-    setCartItems((state) => [...state, item]);
+    setCartItems((state) => [...state.filter(old => old.id !== item.id), item]);
   }
 
   function removeItem(itemId: CartItem["id"]) {
