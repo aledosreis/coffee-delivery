@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 interface CartItem {
   id: number;
@@ -21,6 +21,24 @@ interface CartProviderProps {
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    const storedState = localStorage.getItem("@coffee-delivery:cart-1.0.0")
+
+    if (storedState) {
+      setCartItems(JSON.parse(storedState))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      const stateToStore = JSON.stringify(cartItems)
+
+      localStorage.setItem("@coffee-delivery:cart-1.0.0", stateToStore)
+    } else {
+      localStorage.removeItem("@coffee-delivery:cart-1.0.0")
+    }
+  }, [cartItems])
 
   function addItem(item: CartItem) {
     setCartItems((state) => [...state.filter(old => old.id !== item.id), item]);
