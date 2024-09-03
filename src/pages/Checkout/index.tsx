@@ -1,5 +1,7 @@
-import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Bank,
   CreditCard,
@@ -16,16 +18,36 @@ import latte from "../../assets/Latte.png";
 
 import styles from "./Checkout.module.css";
 
-export function Checkout() {
-  const navigate = useNavigate()
+const checkoutFormSchema = z.object({
+  cep: z.string(),
+  street: z.string(),
+  number: z.number(),
+  complement: z.string().optional(),
+  neighborhood: z.string(),
+  city: z.string(),
+  state: z.string().length(2),
+  paymentMethod: z.string(),
+});
 
-  function handleCheckoutSubmit(e: FormEvent) {
-    e.preventDefault()
-    navigate('/checkout/success')
+type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>;
+
+export function Checkout() {
+  const navigate = useNavigate();
+  const { register, handleSubmit, watch, setValue } = useForm<CheckoutFormInputs>({
+    resolver: zodResolver(checkoutFormSchema),
+  });
+
+  const selectedPayment = watch("paymentMethod");
+
+  function handleCheckoutSubmit() {
+    navigate("/checkout/success");
   }
 
   return (
-    <form className={styles.checkout} onSubmit={handleCheckoutSubmit}>
+    <form
+      className={styles.checkout}
+      onSubmit={handleSubmit(handleCheckoutSubmit)}
+    >
       <div>
         <strong>Complete seu pedido</strong>
 
@@ -40,19 +62,27 @@ export function Checkout() {
 
           <div className={styles.inputs}>
             <div className={styles.group}>
-              <input type="text" placeholder="CEP" />
+              <input type="text" placeholder="CEP" {...register("cep")} />
             </div>
             <div className={styles.group}>
-              <input type="text" placeholder="Rua" />
+              <input type="text" placeholder="Rua" {...register("street")} />
             </div>
             <div className={styles.group}>
-              <input type="text" placeholder="Número" />
-              <input type="text" placeholder="Complemento (opcional)" />
+              <input type="text" placeholder="Número" {...register("number")} />
+              <input
+                type="text"
+                placeholder="Complemento (opcional)"
+                {...register("complement")}
+              />
             </div>
             <div className={styles.group}>
-              <input type="text" placeholder="Bairro" />
-              <input type="text" placeholder="Cidade" />
-              <input type="text" placeholder="UF" />
+              <input
+                type="text"
+                placeholder="Bairro"
+                {...register("neighborhood")}
+              />
+              <input type="text" placeholder="Cidade" {...register("city")} />
+              <input type="text" placeholder="UF" {...register("state")} />
             </div>
           </div>
         </div>
@@ -69,20 +99,36 @@ export function Checkout() {
           </div>
 
           <div className={styles.options}>
-            <select name="payment" id="payment">
+            <select
+              id="paymentMethod"
+              {...register("paymentMethod")}
+            >
+              <option value="">Selecione...</option>
               <option value="credit">Cartão de crédito</option>
               <option value="debit">Cartão de débito</option>
               <option value="money">Dinheiro</option>
             </select>
-            <div className={styles.option} data-selected="true">
+            <div
+              className={styles.option}
+              data-selected={selectedPayment === "credit"}
+              onClick={() => setValue("paymentMethod", "credit")}
+            >
               <CreditCard size={16} />
               <span>Cartão de crédito</span>
             </div>
-            <div className={styles.option}>
+            <div
+              className={styles.option}
+              data-selected={selectedPayment === "debit"}
+              onClick={() => setValue("paymentMethod", "debit")}
+            >
               <Bank size={16} />
               <span>Cartão de débito</span>
             </div>
-            <div className={styles.option}>
+            <div
+              className={styles.option}
+              data-selected={selectedPayment === "money"}
+              onClick={() => setValue("paymentMethod", "money")}
+            >
               <Money size={16} />
               <span>Dinheiro</span>
             </div>
