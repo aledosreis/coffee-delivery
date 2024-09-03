@@ -12,11 +12,11 @@ import {
   Plus,
   Trash,
 } from "@phosphor-icons/react";
-
-import tradicional from "../../assets/Expresso.png";
-import latte from "../../assets/Latte.png";
+import { coffees } from "../../data/coffee";
+import { useCart } from "../../hooks/useCart";
 
 import styles from "./Checkout.module.css";
+import { Fragment } from "react/jsx-runtime";
 
 const checkoutFormSchema = z.object({
   cep: z.string(),
@@ -26,7 +26,7 @@ const checkoutFormSchema = z.object({
   neighborhood: z.string().min(1),
   city: z.string().min(1),
   state: z.string().length(2),
-  paymentMethod: z.enum(["credit", "debit", "money"])
+  paymentMethod: z.enum(["credit", "debit", "money"]),
 });
 
 type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>;
@@ -37,11 +37,22 @@ export function Checkout() {
     useForm<CheckoutFormInputs>({
       resolver: zodResolver(checkoutFormSchema),
     });
+  const { cartItems } = useCart();
+
+  const coffeesInCart = cartItems.map((item) => {
+    const coffeeInfo = coffees.find((coffee) => coffee.id === item.id);
+
+    return {
+      ...coffeeInfo,
+      quantity: item.quantity,
+      totalPrice: coffeeInfo!.price * item.quantity
+    };
+  });
 
   const selectedPayment = watch("paymentMethod");
 
   function handleCheckoutSubmit(data: CheckoutFormInputs) {
-    console.log(data)
+    console.log(data);
     navigate("/checkout/success");
   }
 
@@ -143,52 +154,35 @@ export function Checkout() {
         <strong>Cafés selecionados</strong>
 
         <div className={styles.price}>
-          <div className={styles.coffee}>
-            <img src={tradicional} />
-            <div className={styles.coffeeInfo}>
-              <span>Expresso Tradicional</span>
-              <div className={styles.actions}>
-                <div className={styles.quantity}>
-                  <button>
-                    <Plus weight="bold" size={14} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Minus weight="bold" size={14} />
-                  </button>
+          {coffeesInCart.map((coffee) => {
+            return (
+              <Fragment key={coffee.id}>
+                <div className={styles.coffee}>
+                  <img src={coffee.image} />
+                  <div className={styles.coffeeInfo}>
+                    <span>{coffee.name}</span>
+                    <div className={styles.actions}>
+                      <div className={styles.quantity}>
+                        <button>
+                          <Minus weight="bold" size={14} />
+                        </button>
+                        <span>{coffee.quantity}</span>
+                        <button>
+                          <Plus weight="bold" size={14} />
+                        </button>
+                      </div>
+                      <button>
+                        <Trash weight="bold" size={16} />
+                        Remover
+                      </button>
+                    </div>
+                  </div>
+                  <span>R$ {coffee.totalPrice?.toFixed(2).replace('.', ',')}</span>
                 </div>
-                <button>
-                  <Trash weight="bold" size={16} />
-                  Remover
-                </button>
-              </div>
-            </div>
-            <span>R$ 9,90</span>
-          </div>
-          <div className={styles.separator} />
-          <div className={styles.coffee}>
-            <img src={latte} />
-            <div className={styles.coffeeInfo}>
-              <span>Latte</span>
-              <div className={styles.actions}>
-                <div className={styles.quantity}>
-                  <button>
-                    <Plus weight="bold" size={14} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Minus weight="bold" size={14} />
-                  </button>
-                </div>
-                <button>
-                  <Trash weight="bold" size={16} />
-                  Remover
-                </button>
-              </div>
-            </div>
-            <span>R$ 19,80</span>
-          </div>
-          <div className={styles.separator} />
+                <div className={styles.separator} />
+              </Fragment>
+            );
+          })}
           <table>
             <tbody>
               <tr>
