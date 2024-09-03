@@ -102,6 +102,12 @@ input::placeholder {
   font-size: 0.75rem;
   line-height: 160%;
   flex: 1;
+  cursor: pointer;
+  transition: background-color .3s;
+}
+
+.option:hover {
+  background-color: var(--base-hover);
 }
 
 .info {
