@@ -74,7 +74,7 @@ export function Checkout() {
               <option value="debit">Cartão de débito</option>
               <option value="money">Dinheiro</option>
             </select>
-            <div className={styles.option}>
+            <div className={styles.option} data-selected="true">
               <CreditCard size={16} />
               <span>Cartão de crédito</span>
             </div>
