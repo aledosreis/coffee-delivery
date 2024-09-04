@@ -35,7 +35,7 @@ export function CoffeeCard({ coffee }: CoffeCardProps) {
         <img src={coffee.image} alt={coffee.name} />
         <div className={styles.tags}>
           {coffee.tag.map((tag) => (
-            <span>{tag}</span>
+            <span key={tag}>{tag}</span>
           ))}
         </div>
         <strong>{coffee.name}</strong>
