@@ -49,6 +49,14 @@ export function Checkout() {
     };
   });
 
+  const totalItemsPrice = coffeesInCart.reduce((previousValue, currentItem) => {
+    return (previousValue += currentItem.totalPrice)
+  }, 0)
+
+  const shippingPrice = 3.50
+
+  const totalOrder = totalItemsPrice + shippingPrice
+
   const selectedPayment = watch("paymentMethod");
 
   function handleIncrementItem(itemId: number) {
@@ -199,15 +207,15 @@ export function Checkout() {
             <tbody>
               <tr>
                 <td>Total de itens</td>
-                <td>R$ 29,70</td>
+                <td>R$ {totalItemsPrice.toFixed(2).replace('.',',')}</td>
               </tr>
               <tr>
                 <td>Entrega</td>
-                <td>R$ 3,50</td>
+                <td>R$ {shippingPrice.toFixed(2).replace('.',',')}</td>
               </tr>
               <tr>
                 <td>Total</td>
-                <td>R$ 33,20</td>
+                <td>R$ {totalOrder.toFixed(2).replace('.',',')}</td>
               </tr>
             </tbody>
           </table>
