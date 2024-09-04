@@ -29,7 +29,7 @@ const checkoutFormSchema = z.object({
   paymentMethod: z.enum(["credit", "debit", "money"]),
 });
 
-type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>;
+export type CheckoutFormInputs = z.infer<typeof checkoutFormSchema>;
 
 export function Checkout() {
   const navigate = useNavigate();
