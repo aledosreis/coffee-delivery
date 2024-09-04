@@ -19,10 +19,10 @@ import styles from "./Checkout.module.css";
 import { Fragment } from "react/jsx-runtime";
 
 const checkoutFormSchema = z.object({
-  cep: z.string(),
+  cep: z.string().min(1),
   street: z.string().min(1),
   number: z.number().min(1),
-  complement: z.string().optional(),
+  complement: z.string(),
   neighborhood: z.string().min(1),
   city: z.string().min(1),
   state: z.string().length(2),
@@ -37,7 +37,7 @@ export function Checkout() {
     useForm<CheckoutFormInputs>({
       resolver: zodResolver(checkoutFormSchema),
     });
-  const { cartItems, incrementItemQuantity, decrementItemQuantity, removeItem } = useCart();
+  const { cartItems, incrementItemQuantity, decrementItemQuantity, removeItem, checkout } = useCart();
 
   const coffeesInCart = cartItems.map((item) => {
     const coffeeInfo = coffees.find((coffee) => coffee.id === item.id);
@@ -72,8 +72,15 @@ export function Checkout() {
   }
 
   function handleCheckoutSubmit(data: CheckoutFormInputs) {
-    console.log(data);
-    navigate("/checkout/success");
+    const newOrderId = new Date().getTime()
+
+    checkout({
+      id: newOrderId,
+      items: cartItems,
+      ...data
+    })
+
+    navigate(`/checkout/${newOrderId}/success`);
   }
 
   return (
